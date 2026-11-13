@@ -1,0 +1,653 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>동해시 5대 관광 권역 소개 프레젠테이션</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap');
+
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  body {
+    font-family: 'Noto Sans KR', sans-serif;
+    background-color: #0b192c;
+    color: #1e293b;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    width: 100vw;
+  }
+
+  #stage {
+    width: 1280px;
+    height: 720px;
+    position: relative;
+    background: #ffffff;
+    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.5);
+    border-radius: 12px;
+    overflow: hidden;
+    transform-origin: center center;
+  }
+
+  .slide {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    padding: 52px 64px;
+    display: none;
+    flex-direction: column;
+    justify-content: space-between;
+    background: #f8fafc;
+    animation: fadeIn 0.4s ease;
+  }
+
+  .slide.active {
+    display: flex;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* Slide 1: Cover */
+  .slide-cover {
+    background: linear-gradient(135deg, #071952 0%, #0b666a 55%, #35a29f 100%);
+    color: #ffffff;
+    justify-content: center;
+    position: relative;
+  }
+
+  .slide-cover::after {
+    content: "";
+    position: absolute;
+    right: -120px;
+    bottom: -120px;
+    width: 520px;
+    height: 520px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.06);
+    pointer-events: none;
+  }
+
+  .cover-badge {
+    display: inline-block;
+    background: rgba(255, 255, 255, 0.18);
+    backdrop-filter: blur(6px);
+    padding: 8px 18px;
+    border-radius: 999px;
+    font-size: 16px;
+    font-weight: 500;
+    letter-spacing: 1px;
+    margin-bottom: 24px;
+    width: fit-content;
+  }
+
+  .cover-title {
+    font-size: 62px;
+    font-weight: 900;
+    line-height: 1.2;
+    margin-bottom: 20px;
+    letter-spacing: -1px;
+  }
+
+  .cover-subtitle {
+    font-size: 24px;
+    font-weight: 300;
+    color: #e0f2fe;
+    margin-bottom: 48px;
+    line-height: 1.5;
+  }
+
+  .cover-zones {
+    display: flex;
+    gap: 14px;
+    flex-wrap: wrap;
+  }
+
+  .cover-zone-pill {
+    background: rgba(255, 255, 255, 0.14);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    padding: 10px 20px;
+    border-radius: 10px;
+    font-size: 17px;
+    font-weight: 500;
+  }
+
+  /* Header for Content Slides */
+  .slide-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    border-bottom: 2px solid #e2e8f0;
+    padding-bottom: 16px;
+    margin-bottom: 28px;
+  }
+
+  .slide-kicker {
+    font-size: 15px;
+    font-weight: 700;
+    color: #0284c7;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 4px;
+  }
+
+  .slide-title {
+    font-size: 34px;
+    font-weight: 800;
+    color: #0f172a;
+  }
+
+  .slide-page-badge {
+    font-size: 15px;
+    font-weight: 600;
+    color: #64748b;
+    background: #e2e8f0;
+    padding: 6px 14px;
+    border-radius: 999px;
+  }
+
+  /* Cards Grid */
+  .grid-2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 28px;
+    flex: 1;
+  }
+
+  .grid-3 {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    flex: 1;
+  }
+
+  .card {
+    background: #ffffff;
+    border-radius: 16px;
+    padding: 28px;
+    box-shadow: 0 8px 24px rgba(15, 23, 42, 0.06);
+    border: 1px solid #e2e8f0;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  .card-tag {
+    display: inline-block;
+    font-size: 13px;
+    font-weight: 700;
+    padding: 5px 12px;
+    border-radius: 6px;
+    margin-bottom: 12px;
+    width: fit-content;
+  }
+
+  .tag-blue { background: #e0f2fe; color: #0369a1; }
+  .tag-teal { background: #ccfbf1; color: #0f766e; }
+  .tag-amber { background: #fef3c7; color: #b45309; }
+  .tag-indigo { background: #e0e7ff; color: #4338ca; }
+  .tag-emerald { background: #d1fae5; color: #047857; }
+
+  .card h3 {
+    font-size: 24px;
+    font-weight: 800;
+    color: #0f172a;
+    margin-bottom: 10px;
+  }
+
+  .card-desc {
+    font-size: 16px;
+    color: #475569;
+    line-height: 1.55;
+    margin-bottom: 18px;
+  }
+
+  .card-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: auto;
+    padding-top: 14px;
+    border-top: 1px dashed #e2e8f0;
+  }
+
+  .card-list li {
+    font-size: 15px;
+    color: #334155;
+    line-height: 1.45;
+    padding-left: 18px;
+    position: relative;
+  }
+
+  .card-list li::before {
+    content: "•";
+    position: absolute;
+    left: 0;
+    color: #0284c7;
+    font-weight: 900;
+  }
+
+  .card-list strong {
+    color: #0f172a;
+  }
+
+  /* Slide 5 Special Layout */
+  .summary-layout {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 28px;
+    flex: 1;
+  }
+
+  .course-box {
+    background: #ffffff;
+    border-radius: 16px;
+    padding: 26px;
+    border: 1px solid #e2e8f0;
+    box-shadow: 0 8px 24px rgba(15, 23, 42, 0.05);
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .course-item {
+    background: #f1f5f9;
+    padding: 16px 20px;
+    border-radius: 12px;
+    border-left: 5px solid #0284c7;
+  }
+
+  .course-item.teal { border-left-color: #0d9488; }
+  .course-item.amber { border-left-color: #d97706; }
+
+  .course-item h4 {
+    font-size: 18px;
+    font-weight: 700;
+    color: #0f172a;
+    margin-bottom: 6px;
+  }
+
+  .course-item p {
+    font-size: 15px;
+    color: #475569;
+  }
+
+  .info-stack {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .info-card {
+    background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+    color: #ffffff;
+    border-radius: 16px;
+    padding: 26px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .info-card.light {
+    background: #ecfeff;
+    color: #0f172a;
+    border: 1px solid #a5f3fc;
+  }
+
+  .info-card h4 {
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 12px;
+    color: #38bdf8;
+  }
+
+  .info-card.light h4 {
+    color: #0e7490;
+  }
+
+  .info-card p, .info-card li {
+    font-size: 15px;
+    line-height: 1.6;
+  }
+
+  .info-card ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  /* Controls */
+  #controls {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(15, 23, 42, 0.85);
+    backdrop-filter: blur(10px);
+    padding: 10px 22px;
+    border-radius: 999px;
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    color: #ffffff;
+    z-index: 100;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+  }
+
+  .ctrl-btn {
+    background: rgba(255, 255, 255, 0.12);
+    border: none;
+    color: #ffffff;
+    padding: 6px 14px;
+    border-radius: 999px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 600;
+    transition: background 0.2s;
+  }
+
+  .ctrl-btn:hover {
+    background: rgba(255, 255, 255, 0.28);
+  }
+
+  .dots {
+    display: flex;
+    gap: 8px;
+  }
+
+  .dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.3);
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .dot.active {
+    background: #38bdf8;
+    transform: scale(1.25);
+  }
+
+  #slide-counter {
+    font-size: 14px;
+    font-weight: 600;
+    min-width: 44px;
+    text-align: center;
+  }
+</style>
+</head>
+<body>
+
+<div id="stage">
+  <!-- Slide 1: Cover -->
+  <section class="slide slide-cover active">
+    <div class="cover-badge">DONGHAE CITY TOURISM GUIDE</div>
+    <h1 class="cover-title">푸른 바다와 기암괴석의 도시,<br>동해시 5대 관광 권역</h1>
+    <p class="cover-subtitle">감성 어촌마을부터 천하절경 계곡, 대한민국 대표 일출 명소까지<br>사계절 다채로운 매력을 품은 동해의 핵심 명소를 소개합니다.</p>
+    <div class="cover-zones">
+      <div class="cover-zone-pill">01. 묵호권역</div>
+      <div class="cover-zone-pill">02. 무릉권역</div>
+      <div class="cover-zone-pill">03. 추암권역</div>
+      <div class="cover-zone-pill">04. 천곡권역</div>
+      <div class="cover-zone-pill">05. 망상권역</div>
+    </div>
+  </section>
+
+  <!-- Slide 2: Mukho Zone -->
+  <section class="slide">
+    <div class="slide-header">
+      <div>
+        <div class="slide-kicker">ZONE 01 · MUKHO</div>
+        <h2 class="slide-title">묵호권역 — 감성 어촌마을 &amp; 익사이팅 체험</h2>
+      </div>
+      <span class="slide-page-badge">2 / 5</span>
+    </div>
+    <div class="grid-2">
+      <div class="card">
+        <div>
+          <span class="card-tag tag-blue">복합 체험 전망대</span>
+          <h3>도째비골 스카이밸리</h3>
+          <p class="card-desc">동해바다와 해안 절벽을 한눈에 조망할 수 있는 스릴 넘치는 복합 체험 관광지입니다.</p>
+        </div>
+        <ul class="card-list">
+          <li><strong>핵심 볼거리:</strong> 해발 59m 높이 유리 바닥 스카이워크, 도깨비 방망이 형상 해랑전망대</li>
+          <li><strong>체험 요소:</strong> 공중 와이어 '스카이사이클', 원통형 미끄럼틀 '자이언트 슬라이드'</li>
+          <li><strong>운영 안내:</strong> 매주 월요일 휴무 (화~목·주말 10:00~18:00, 금 10:00~16:30)</li>
+        </ul>
+      </div>
+      <div class="card">
+        <div>
+          <span class="card-tag tag-teal">감성 벽화 골목</span>
+          <h3>논골담길 &amp; 묵호등대</h3>
+          <p class="card-desc">1970년대 어업 중심지였던 묵호항 어부들의 애환과 삶의 이야기가 담벼락마다 벽화로 그려진 감성 언덕 마을입니다.</p>
+        </div>
+        <ul class="card-list">
+          <li><strong>핵심 볼거리:</strong> 논골 1~3길, 등대오름길 등 네 갈래 골목길마다 다른 테마 벽화</li>
+          <li><strong>감성 포인트:</strong> 골목 사이사이 자리한 오션뷰 감성 카페 및 소품샵</li>
+          <li><strong>연계 코스:</strong> 골목 꼭대기 묵호등대와 연계해 묵호 바다 전경 및 야경 감상</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- Slide 3: Mureung Zone -->
+  <section class="slide">
+    <div class="slide-header">
+      <div>
+        <div class="slide-kicker">ZONE 02 · MUREUNG</div>
+        <h2 class="slide-title">무릉권역 — 천하절경 계곡 &amp; 폐광산의 화려한 변신</h2>
+      </div>
+      <span class="slide-page-badge">3 / 5</span>
+    </div>
+    <div class="grid-2">
+      <div class="card">
+        <div>
+          <span class="card-tag tag-emerald">이색 액티비티 명소</span>
+          <h3>무릉별유천지</h3>
+          <p class="card-desc">40여 년간 석회석을 채광하던 폐광산(무릉3지구)을 복구해 조성한 이색 복합 체험 관광지입니다.</p>
+        </div>
+        <ul class="card-list">
+          <li><strong>핵심 볼거리:</strong> 에메랄드빛 호수(청옥호·금곡호), 두미르전망대, 6월 라벤더 정원</li>
+          <li><strong>체험 요소:</strong> 오프로드 루지, 스카이글라이더, 알파인코스터, 롤러코스터형 짚라인</li>
+          <li><strong>운영 안내:</strong> 매주 월요일 휴무 (화~일 09:30~17:30) · 순환 열차(무릉별열차) 운행</li>
+        </ul>
+      </div>
+      <div class="card">
+        <div>
+          <span class="card-tag tag-amber">대한민국 명승지</span>
+          <h3>무릉계곡 관광지</h3>
+          <p class="card-desc">두타산과 청옥산을 배경으로 기암괴석과 폭포가 어우러져 '무릉도원'이라 불리는 동해 대표 명승지입니다.</p>
+        </div>
+        <ul class="card-list">
+          <li><strong>핵심 볼거리:</strong> 넓은 암반인 무릉반석, 천년 고찰 삼화사, 쌍폭포, 용추폭포</li>
+          <li><strong>트레킹 명소:</strong> 기암절벽의 비경을 품은 베틀바위 산성길 트레킹 코스</li>
+          <li><strong>테마 특징:</strong> 사계절 신록과 단풍이 빼어나며 사찰 템플스테이 및 힐링 산책 적합</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- Slide 4: Chuam, Cheongok, Mangsang Zones -->
+  <section class="slide">
+    <div class="slide-header">
+      <div>
+        <div class="slide-kicker">ZONES 03 – 05 · COASTAL &amp; URBAN</div>
+        <h2 class="slide-title">추암 · 천곡 · 망상권역 — 일출, 도심 동굴, 해양 휴양</h2>
+      </div>
+      <span class="slide-page-badge">4 / 5</span>
+    </div>
+    <div class="grid-3">
+      <div class="card">
+        <div>
+          <span class="card-tag tag-amber">03. 추암권역</span>
+          <h3>추암 촛대바위</h3>
+          <p class="card-desc">애국가 첫 소절 배경 화면으로 등장하는 대한민국 대표 일출 명소입니다.</p>
+        </div>
+        <ul class="card-list">
+          <li><strong>주요 명소:</strong> 촛대바위, 능파대, 고려시대 정자 해암정, 추암조각공원</li>
+          <li><strong>체험 요소:</strong> 바다 위 72m 해상 출렁다리 및 야간 경관 조명 산책</li>
+        </ul>
+      </div>
+      <div class="card">
+        <div>
+          <span class="card-tag tag-indigo">04. 천곡권역</span>
+          <h3>천곡황금박쥐동굴 &amp; 한섬해변</h3>
+          <p class="card-desc">시내 중심부에 위치해 접근성이 뛰어나며 자연 유산과 호젓한 바다를 함께 즐길 수 있습니다.</p>
+        </div>
+        <ul class="card-list">
+          <li><strong>황금박쥐동굴:</strong> 전국 유일 도심 속 1.5km 천연 석회석 동굴 (09:00~18:00)</li>
+          <li><strong>한섬해변:</strong> 한섬감성바닷길 데크 산책로 및 SNS 인기 터널 포토존</li>
+        </ul>
+      </div>
+      <div class="card">
+        <div>
+          <span class="card-tag tag-blue">05. 망상권역</span>
+          <h3>망상 해수욕장</h3>
+          <p class="card-desc">끝없이 펼쳐진 고운 백사장과 울창한 송림을 자랑하는 사계절 체류형 휴양지입니다.</p>
+        </div>
+        <ul class="card-list">
+          <li><strong>해양 레저:</strong> 맑고 얕은 수심의 백사장 일출 감상 및 인근 대진해변 서핑</li>
+          <li><strong>숙박 인프라:</strong> 망상오토캠핑리조트, 캐라반, 망상해변한옥마을 완비</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- Slide 5: Recommended Courses, Food & Access -->
+  <section class="slide">
+    <div class="slide-header">
+      <div>
+        <div class="slide-kicker">TRAVEL PLANNING · TIPS</div>
+        <h2 class="slide-title">테마별 추천 코스 &amp; 동해 미식 · 교통 가이드</h2>
+      </div>
+      <span class="slide-page-badge">5 / 5</span>
+    </div>
+    <div class="summary-layout">
+      <div class="course-box">
+        <h3 style="font-size: 21px; font-weight: 800; color: #0f172a;">🗺️ 테마별 추천 여행 코스</h3>
+        <div class="course-item">
+          <h4>① 당일치기 감성 집중 코스 (묵호권역)</h4>
+          <p>KTX 묵호역 도착 → 논골담길 벽화 &amp; 카페 → 묵호등대 → 도째비골 스카이밸리 &amp; 해랑전망대</p>
+        </div>
+        <div class="course-item teal">
+          <h4>② 가족·힐링 자연 탐방 코스</h4>
+          <p>무릉계곡(삼화사·용추폭포) → 천곡황금박쥐동굴 → 망상해변 송림 산책 및 오토캠핑</p>
+        </div>
+        <div class="course-item amber">
+          <h4>③ 액티비티·인생샷 투어 코스</h4>
+          <p>추암 촛대바위 일출 → 무릉별유천지(루지·에메랄드 호수) → 한섬감성바닷길 터널 포토존</p>
+        </div>
+      </div>
+
+      <div class="info-stack">
+        <div class="info-card">
+          <h4>🦀 동해 대표 먹거리 &amp; 특산품</h4>
+          <ul>
+            <li>• <strong>묵호항 활어회 &amp; 물회:</strong> 산지에서 바로 즐기는 신선한 해산물</li>
+            <li>• <strong>곰치국 &amp; 동해 대게:</strong> 시원한 해장 별미와 꽉 찬 속살의 대게</li>
+            <li>• <strong>묵호태 &amp; 북평민속5일장:</strong> 해풍에 말린 먹태와 전통시장 주전부리</li>
+          </ul>
+        </div>
+        <div class="info-card light">
+          <h4>🚄 뛰어난 수도권 접근성 &amp; 시티투어</h4>
+          <p><strong>KTX 이음(묵호역 · 동해역 정차)</strong>으로 서울 청량리에서 약 2시간대면 도착하며, 주요 관광지를 순환하는 <strong>동해시티투어버스</strong>로 뚜벅이 여행도 편리합니다.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<div id="controls">
+  <button class="ctrl-btn" id="prev-btn">◀ 이전</button>
+  <div class="dots" id="dots"></div>
+  <span id="slide-counter">1 / 5</span>
+  <button class="ctrl-btn" id="next-btn">다음 ▶</button>
+  <button class="ctrl-btn" id="fs-btn">전체화면</button>
+</div>
+
+<script>
+  const slides = document.querySelectorAll('.slide');
+  const dotsContainer = document.getElementById('dots');
+  const counter = document.getElementById('slide-counter');
+  const stage = document.getElementById('stage');
+  let current = 0;
+
+  // Create indicator dots
+  slides.forEach((_, idx) => {
+    const dot = document.createElement('div');
+    dot.className = 'dot' + (idx === 0 ? ' active' : '');
+    dot.addEventListener('click', () => goToSlide(idx));
+    dotsContainer.appendChild(dot);
+  });
+
+  const dots = document.querySelectorAll('.dot');
+
+  function goToSlide(index) {
+    slides[current].classList.remove('active');
+    dots[current].classList.remove('active');
+    current = (index + slides.length) % slides.length;
+    slides[current].classList.add('active');
+    dots[current].classList.add('active');
+    counter.textContent = `${current + 1} / ${slides.length}`;
+  }
+
+  document.getElementById('prev-btn').addEventListener('click', () => goToSlide(current - 1));
+  document.getElementById('next-btn').addEventListener('click', () => goToSlide(current + 1));
+
+  document.getElementById('fs-btn').addEventListener('click', () => {
+    if (!document.fullscreenElement) {
+      document.documentElement.requestFullscreen().catch(() => {});
+    } else {
+      document.exitFullscreen().catch(() => {});
+    }
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowRight' || e.key === ' ') {
+      e.preventDefault();
+      goToSlide(current + 1);
+    } else if (e.key === 'ArrowLeft') {
+      e.preventDefault();
+      goToSlide(current - 1);
+    }
+  });
+
+  // Touch swipe support
+  let touchStartX = 0;
+  document.addEventListener('touchstart', (e) => {
+    touchStartX = e.changedTouches[0].screenX;
+  });
+  document.addEventListener('touchend', (e) => {
+    const diff = e.changedTouches[0].screenX - touchStartX;
+    if (Math.abs(diff) > 50) {
+      goToSlide(diff < 0 ? current + 1 : current - 1);
+    }
+  });
+
+  // Responsive 16:9 scaling
+  function resizeStage() {
+    const scaleX = (window.innerWidth - 32) / 1280;
+    const scaleY = (window.innerHeight - 90) / 720;
+    const scale = Math.min(scaleX, scaleY, 1.3);
+    stage.style.transform = `scale(${scale})`;
+  }
+
+  window.addEventListener('resize', resizeStage);
+  resizeStage();
+</script>
+</body>
+</html>
